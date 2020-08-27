@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AFORO255.MS.TEST.Transaction
+namespace AFORO255.MS.TEST.Notification
 {
     public class Program
     {

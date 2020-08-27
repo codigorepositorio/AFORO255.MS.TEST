@@ -1,12 +1,12 @@
-﻿using AFORO255.MS.TEST.Transaction.DTO;
-using AFORO255.MS.TEST.Transaction.Model;
-using AFORO255.MS.TEST.Transaction.Repository;
+﻿using AFORO255.MS.TEST.Notification.DTO;
+using AFORO255.MS.TEST.Notification.Model;
+using AFORO255.MS.TEST.Notification.Repository;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AFORO255.MS.TEST.Transaction.Service
+namespace AFORO255.MS.TEST.Notification.Service
 {
     public class HistoryService : IHistoryService
     {
@@ -34,7 +34,7 @@ namespace AFORO255.MS.TEST.Transaction.Service
                 response.Add(new HistoryResponse()
                 {
                     Idtransaccion = item.Idtransaccion,
-                    Idinvoice=item.Idinvoice,
+                    Idinvoice=item.IdInvoice,
                     Amount=item.Amount,
                     Date=item.Date
                 }) ;

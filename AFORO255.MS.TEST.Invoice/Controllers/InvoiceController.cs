@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AFORO255.MS.TEST.Invoice.DTO;
 using AFORO255.MS.TEST.Invoice.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,5 +25,34 @@ namespace AFORO255.MS.TEST.Invoice.Controllers
             var invoices = _invoiceService.GetAll();
             return Ok(invoices);
         }
+
+
+        [HttpPost("Pago")]
+        public IActionResult Pagos([FromBody] InvoiceRequest request)
+        {
+
+            var entityInvoice = _invoiceService.GetAll().Where(x => x.IdInvoice == request.IdInvoice).FirstOrDefault();
+
+            if (entityInvoice.State.Equals("PAGADO"))
+            {
+                return BadRequest(new { message = $"La deuda ya se encuentra PAGADA." });
+            }
+            
+
+            if (entityInvoice.Amount != request.Amount)
+            {
+                var deuda = $",  =======> Deuda a Pagar: " + entityInvoice.Amount.ToString();
+                return BadRequest(new { message = $"El Monto indicado es Incorrecto. " + deuda });
+            }          
+            _invoiceService.Pay(new Model.Invoice()
+            {
+                IdInvoice = request.IdInvoice,
+                Amount = entityInvoice.Amount,
+                State = "PAGADO"
+            });
+
+            return Ok();
+        }
     }
+
 }

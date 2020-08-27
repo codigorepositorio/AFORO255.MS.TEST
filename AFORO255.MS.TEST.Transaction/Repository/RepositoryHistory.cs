@@ -1,8 +1,8 @@
-﻿using AFORO255.MS.TEST.Transaction.Model;
+﻿using AFORO255.MS.TEST.Notification.Model;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace AFORO255.MS.TEST.Transaction.Repository
+namespace AFORO255.MS.TEST.Notification.Repository
 {
     public class RepositoryHistory: IRepositoryHistory
     {

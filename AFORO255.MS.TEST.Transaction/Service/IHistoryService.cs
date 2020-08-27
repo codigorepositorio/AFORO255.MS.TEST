@@ -1,9 +1,9 @@
-﻿using AFORO255.MS.TEST.Transaction.DTO;
-using AFORO255.MS.TEST.Transaction.Model;
+﻿using AFORO255.MS.TEST.Notification.DTO;
+using AFORO255.MS.TEST.Notification.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AFORO255.MS.TEST.Transaction.Service
+namespace AFORO255.MS.TEST.Notification.Service
 {
     public interface IHistoryService
     {

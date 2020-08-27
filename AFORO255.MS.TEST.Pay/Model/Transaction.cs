@@ -9,6 +9,8 @@ namespace AFORO255.MS.TEST.Pay.Model
         [Key]
         [Column("id_operation")]
         public int IdOperation { get; set; }
+
+
         [Column("id_invoice")]
         public int IdInvoice { get; set; }
         public decimal Amount { get; set; }

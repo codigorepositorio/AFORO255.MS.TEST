@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AFORO255.MS.TEST.Transaction.Model;
-using AFORO255.MS.TEST.Transaction.Service;
+using AFORO255.MS.TEST.Notification.Model;
+using AFORO255.MS.TEST.Notification.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AFORO255.MS.TEST.Transaction.Controllers
+namespace AFORO255.MS.TEST.Notification.Controllers
 {
     [Route("api/History")]
     [ApiController]

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AFORO255.MS.TEST.Invoice.Service
 {
@@ -14,9 +15,15 @@ namespace AFORO255.MS.TEST.Invoice.Service
         {
             _invoiceRepository = invoiceRepository;
         }
+
         public IEnumerable<Model.Invoice> GetAll()
         {
             return _invoiceRepository.GetAll();
+        }
+
+        public bool Pay(Model.Invoice invoice)
+        {
+            return _invoiceRepository.Pay(invoice);
         }
     }
 }

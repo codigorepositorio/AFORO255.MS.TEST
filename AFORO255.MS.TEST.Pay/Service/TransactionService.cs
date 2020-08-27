@@ -17,6 +17,12 @@ namespace AFORO255.MS.TEST.Pay.Service
             return _transactionRepository.GetAll();
         }
 
+        public Transaction PayReverse(Transaction transaction)
+        {
+            _transactionRepository.PayReverse(transaction);
+            return transaction;
+        }
+
         public Transaction Pay(Transaction transaction)
         {
             _transactionRepository.Pay(transaction);

@@ -1,10 +1,9 @@
 ﻿using AFORO255.MS.TEST.Pay.Model;
 using AFORO255.MS.TEST.Pay.Repository.Data;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace AFORO255.MS.TEST.Pay.Repository
 {
@@ -23,7 +22,14 @@ namespace AFORO255.MS.TEST.Pay.Repository
 
         public Transaction Pay(Transaction transaction)
         {
-             _contextDataBase.Transaction.Add(transaction);
+            _contextDataBase.Transaction.Add(transaction);
+            _contextDataBase.SaveChanges();
+            return transaction;
+        }
+
+        public Transaction PayReverse(Transaction transaction)
+        {
+            _contextDataBase.Transaction.Add(transaction);
             _contextDataBase.SaveChanges();
             return transaction;
         }

@@ -9,6 +9,7 @@ namespace AFORO255.MS.TEST.Pay.Service
     public interface ITransactionService
     {
         Transaction Pay(Transaction transaction);
+        Transaction PayReverse(Transaction transaction);
         IEnumerable<Transaction> GetAll();
     }
 }
