@@ -34,8 +34,8 @@ namespace AFORO255.MS.TEST.Notification
             services.AddMediatR(typeof(Startup));
             services.AddRabbitMQ();
 
-            services.AddTransient<PayEventHandler>();
-            services.AddTransient<IEventHandler<PayCreatedEvent>, PayEventHandler>();
+            services.AddTransient<TransactionPayEventHandler>();
+            services.AddTransient<IEventHandler<TransactionPayCreatedEvent>, TransactionPayEventHandler>();
 
 
 
@@ -63,7 +63,7 @@ namespace AFORO255.MS.TEST.Notification
         private void ConfigureEventBus(IApplicationBuilder app)
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-            eventBus.Subscribe<PayCreatedEvent, PayEventHandler>();            
+            eventBus.Subscribe<TransactionPayCreatedEvent, TransactionPayEventHandler>();            
         }
     }
 }

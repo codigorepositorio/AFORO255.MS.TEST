@@ -1,8 +1,8 @@
 ﻿namespace AFORO255.MS.TEST.Pay.RabbitMQ.Commands
 {
-    public class PayCreatedCommand : PayCommand
+    public class TransactionPayCreatedCommand : TransactionPayCommand
     {
-        public PayCreatedCommand(int idOperation, int idInvoice, decimal amount, string date)
+        public TransactionPayCreatedCommand(int idOperation, int idInvoice, decimal amount, string date)
         {
             IdOperation = idOperation;
             IdInvoice = idInvoice;

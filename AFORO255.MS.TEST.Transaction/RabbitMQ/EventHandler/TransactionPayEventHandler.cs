@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace AFORO255.MS.TEST.Notification.RabbitMQ.EventHandler
 {
-    public class PayEventHandler : IEventHandler<PayCreatedEvent>
+    public class TransactionPayEventHandler : IEventHandler<TransactionPayCreatedEvent>
     {
         private readonly IHistoryService _transactionService;
 
-        public PayEventHandler(IHistoryService transactionService)
+        public TransactionPayEventHandler(IHistoryService transactionService)
         {
             _transactionService = transactionService;
         }
-        public Task Handle(PayCreatedEvent @event)
+        public Task Handle(TransactionPayCreatedEvent @event)
         {
             _transactionService.Add(new HistoryTransaction()
             {

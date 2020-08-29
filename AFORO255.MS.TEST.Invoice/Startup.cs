@@ -72,7 +72,7 @@ namespace AFORO255.MS.TEST.Invoice
             {
                 endpoints.MapControllers();
             });
-            //ConfigureEventBus(app);
+            ConfigureEventBus(app);
         }
 
         private void ConfigureEventBus(IApplicationBuilder app)

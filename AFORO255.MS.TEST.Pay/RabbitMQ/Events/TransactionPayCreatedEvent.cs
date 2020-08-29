@@ -2,9 +2,9 @@
 
 namespace AFORO255.MS.TEST.Pay.RabbitMQ.Events
 {
-    public class PayCreatedEvent:Event
+    public class TransactionPayCreatedEvent : Event
     {
-        public PayCreatedEvent(int idOperation, int idInvoice, decimal amount, string date)
+        public TransactionPayCreatedEvent(int idOperation, int idInvoice, decimal amount, string date)
         {
             IdOperation = idOperation;
             IdInvoice = idInvoice;

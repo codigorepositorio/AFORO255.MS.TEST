@@ -22,12 +22,12 @@ namespace AFORO255.MS.TEST.Invoice.Controllers
         [HttpGet]
         public ActionResult GetAllInvoice()
         {
-            var invoices = _invoiceService.GetAll();
+            var invoices = _invoiceService.GetAll().OrderBy(x=>x.IdInvoice);
             return Ok(invoices);
         }
 
 
-        [HttpPost("Pago")]
+        [HttpPost("Pay")]
         public IActionResult Pagos([FromBody] InvoiceRequest request)
         {
 
@@ -36,8 +36,7 @@ namespace AFORO255.MS.TEST.Invoice.Controllers
             if (entityInvoice.State.Equals("PAGADO"))
             {
                 return BadRequest(new { message = $"La deuda ya se encuentra PAGADA." });
-            }
-            
+            }            
 
             if (entityInvoice.Amount != request.Amount)
             {

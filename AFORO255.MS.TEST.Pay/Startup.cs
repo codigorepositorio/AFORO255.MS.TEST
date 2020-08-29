@@ -47,7 +47,7 @@ namespace AFORO255.MS.TEST.Pay
             services.AddRabbitMQ();
 
             services.AddTransient<IRequestHandler<InvoiceCreatedCommand, bool>, InvoiceCommandHandler>();
-            services.AddTransient<IRequestHandler<PayCreatedCommand, bool>, PayCommandHandler>();
+            services.AddTransient<IRequestHandler<TransactionPayCreatedCommand, bool>, TransactionPayCommandHandler>();
             services.AddTransient<IRequestHandler<NotificationCreateCommand, bool>, NotificationCommandHandler>();
 
             services.AddProxyHttp();

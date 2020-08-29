@@ -1,7 +1,7 @@
 ﻿using MS.AFORO255.Cross.RabbitMQ.Src.Commands;
 namespace AFORO255.MS.TEST.Pay.RabbitMQ.Commands
 {
-    public class PayCommand:Command
+    public class TransactionPayCommand : Command
     {        
         public int IdOperation { get; protected set; }
         public int IdInvoice { get; protected set; }

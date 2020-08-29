@@ -18,7 +18,7 @@ namespace AFORO255.MS.TEST.Notification.Controllers
         }
 
         [HttpPost]
-        public IActionResult GetNotification([FromBody] SendMailDto request)
+        public IActionResult CreateNotification ([FromBody] SendMailDto request)
         {
             SendMail mail = new SendMail()
             {
@@ -29,12 +29,11 @@ namespace AFORO255.MS.TEST.Notification.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult CreateNotification(int id)
+        [HttpGet]
+        public IActionResult GetNotification(int id)
         {
-            var entity = _mailRepository.GetAll();
-            var result = entity.Where(x => x.SendMailId.Equals(id));
-            return Ok(result);
+            var entity = _mailRepository.GetAll();            
+            return Ok(entity);
         }
     }
 }

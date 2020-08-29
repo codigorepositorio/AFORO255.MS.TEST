@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace AFORO255.MS.TEST.Pay.RabbitMQ.CommandHandlers
 {
-    public class PayCommandHandler : IRequestHandler<PayCreatedCommand, bool>
+    public class TransactionPayCommandHandler : IRequestHandler<TransactionPayCreatedCommand, bool>
     {
         private readonly IEventBus _bus;
 
-        public PayCommandHandler(IEventBus bus)
+        public TransactionPayCommandHandler(IEventBus bus)
         {
             _bus = bus;
         }
-        public Task<bool> Handle(PayCreatedCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(TransactionPayCreatedCommand request, CancellationToken cancellationToken)
         {
-            _bus.Publish(new PayCreatedEvent(
+            _bus.Publish(new TransactionPayCreatedEvent(
                 request.IdOperation,
                 request.IdInvoice,
                 request.Amount,

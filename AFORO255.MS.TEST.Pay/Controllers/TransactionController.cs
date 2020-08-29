@@ -29,7 +29,7 @@ namespace AFORO255.MS.TEST.Pay.Controllers
 
             return Ok(transaction);
         }
-        [HttpPost("Pago")]
+        [HttpPost("Pay")]
         public IActionResult Pagos([FromBody] InvoiceRequest request)
         {
 
@@ -45,7 +45,7 @@ namespace AFORO255.MS.TEST.Pay.Controllers
 
             if (isProccess)
             {
-                var createCommad = new PayCreatedCommand(
+                var createCommad = new TransactionPayCreatedCommand(
                 idOperation: transaction.IdOperation,               
                 amount: transaction.Amount,
                 date: transaction.Date,
@@ -53,14 +53,13 @@ namespace AFORO255.MS.TEST.Pay.Controllers
                 );
                 _bus.SendCommand(createCommad);
 
+                var createdInvoice = new InvoiceCreatedCommand(
+                       idInvoice: transaction.IdInvoice,
+                       amount: transaction.Amount,
+                       state: "PAGADO"
+                    );
 
-                //var createdInvoice = new InvoiceCreatedCommand(
-                //       idInvoice: transaction.IdInvoice,
-                //       amount: transaction.Amount,
-                //       state: "PAGADO"
-                //    );
-
-                //_bus.SendCommand(createdInvoice);
+                _bus.SendCommand(createdInvoice);
 
                 var createCommadNotification = new NotificationCreateCommand(
                 idOperation: transaction.IdOperation,
