@@ -1,12 +1,12 @@
-﻿using AFORO255.MS.TEST.Notification.DTO;
-using AFORO255.MS.TEST.Notification.Model;
-using AFORO255.MS.TEST.Notification.Repository;
+﻿using AFORO255.MS.TEST.Transaction.DTO;
+using AFORO255.MS.TEST.Transaction.Model;
+using AFORO255.MS.TEST.Transaction.Repository;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AFORO255.MS.TEST.Notification.Service
+namespace AFORO255.MS.TEST.Transaction.Service
 {
     public class HistoryService : IHistoryService
     {

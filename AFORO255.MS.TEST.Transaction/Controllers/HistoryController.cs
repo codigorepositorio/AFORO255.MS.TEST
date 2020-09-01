@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AFORO255.MS.TEST.Notification.Model;
-using AFORO255.MS.TEST.Notification.Service;
+using AFORO255.MS.TEST.Transaction.Model;
+using AFORO255.MS.TEST.Transaction.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AFORO255.MS.TEST.Notification.Controllers
+namespace AFORO255.MS.TEST.Transaction.Controllers
 {
     [Route("api/History")]
     [ApiController]
@@ -21,11 +21,11 @@ namespace AFORO255.MS.TEST.Notification.Controllers
         }
 
         [HttpGet("{Idinvoice}")]
-        public async Task<IActionResult> GetHistory(int accounId)
+        public async Task<IActionResult> GetHistory(int Idinvoice)
         {
             var result = await _historyService.GetAll();
 
-            //var data = result.Where(x => x.Idinvoice.Equals(accounId)).ToList();
+            //var data = result.Where(x => x.Idinvoice.Equals(Idinvoice)).ToList();
 
             return Ok(result);
         }

@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 
-namespace AFORO255.MS.TEST.Notification
+namespace AFORO255.MS.TEST.Transaction
 {
     public class Program
     {
@@ -20,6 +15,11 @@ namespace AFORO255.MS.TEST.Notification
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration((host, builder) =>
+                    {
+                        var env = host.HostingEnvironment;
+                        builder.AddConfigServer(env.EnvironmentName);
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

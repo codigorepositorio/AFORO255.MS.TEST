@@ -1,4 +1,4 @@
-﻿namespace AFORO255.MS.TEST.Notification.DTO
+﻿namespace AFORO255.MS.TEST.Transaction.DTO
 {
     public class HistoryResponse
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AFORO255.MS.TEST.Notification.Model
+namespace AFORO255.MS.TEST.Transaction.Model
 {
 
     public class HistoryTransaction

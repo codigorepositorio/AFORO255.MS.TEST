@@ -1,7 +1,7 @@
-﻿using AFORO255.MS.TEST.Notification.Model;
+﻿using AFORO255.MS.TEST.Transaction.Model;
 using MongoDB.Driver;
 
-namespace AFORO255.MS.TEST.Notification.Repository
+namespace AFORO255.MS.TEST.Transaction.Repository
 {
     public interface IRepositoryHistory
     {

@@ -1,8 +1,8 @@
-﻿using AFORO255.MS.TEST.Notification.Model;
+﻿using AFORO255.MS.TEST.Transaction.Model;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace AFORO255.MS.TEST.Notification.Repository
+namespace AFORO255.MS.TEST.Transaction.Repository
 {
     public class RepositoryHistory: IRepositoryHistory
     {
@@ -10,7 +10,9 @@ namespace AFORO255.MS.TEST.Notification.Repository
 
         public RepositoryHistory(IConfiguration configuration)
         {
-            var client = new MongoClient(configuration["mongo:cn"]);
+            //var client = new MongoClient(configuration["mongo:cn"]);
+            var client = new MongoClient(configuration["cnmongo"]);
+
             if (client != null)
                 _database = client.GetDatabase(configuration["mongo:database"]);
         }

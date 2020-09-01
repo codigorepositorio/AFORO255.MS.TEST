@@ -2,6 +2,7 @@
 using AFORO255.MS.TEST.Security.Repository;
 using AFORO255.MS.TEST.Security.Repository.Data;
 using AFORO255.MS.TEST.Security.Service;
+using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +34,9 @@ namespace AFORO255.MS.TEST.Security
             services.AddDbContext<ContextDatabase>(
            opt =>
            {
-               opt.UseSqlServer(Configuration["sqlserver:cn"]);
+               //opt.UseSqlServer(Configuration["sqlserver:cn"]);
+               opt.UseSqlServer(Configuration["cnsql"]);
+
            });
 
             services.AddScoped<IAccessService, AccessService>();
