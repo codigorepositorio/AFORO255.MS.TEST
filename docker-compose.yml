@@ -1,0 +1,49 @@
+version: "3.5"
+
+services:
+  app01:
+    image: contenedor01
+    container_name: app-security
+    ports:
+    - 5010:5001
+    networks:
+    - aforo255 
+  app02:
+    image: contenedor02
+    container_name: app-invoices
+    ports:
+    - 5020:5002
+    networks:
+    - aforo255
+  app03:
+    image: contenedor03
+    container_name: app-notification
+    ports:
+    - 5030:5003
+    networks:
+    - aforo255
+  app04:
+    image: contenedor04
+    container_name: app-pay
+    ports:
+    - 5040:5004
+    networks:
+    - aforo255
+  app05:
+    image: contenedor05
+    container_name:  app-transaction
+    ports:
+    - 5050:5005
+    networks:
+    - aforo255
+   app06:
+    image: contenedor05
+    container_name:  app-gategay
+    ports:
+    - 5001:5000
+    networks:
+    - aforo255
+
+networks:
+  aforo255:
+    name: aforo255-test 
