@@ -4,7 +4,7 @@
 
       /////////////////////////INICIO - API SECURITY/Seguridad////////////////////////////////////////
       //"applicationUrl": "http://localhost:5001/api/auht"
-      "DownstreamPathTemplate": "/security-service/api/auth",
+      "DownstreamPathTemplate": "/app-security/api/auth",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -20,7 +20,7 @@
     {
       //"applicationUrl": "http://localhost:5002/api/invoice"
       //"http": null, //localhost:9999/invoice-service/api/invoice
-      "DownstreamPathTemplate": "/invoice-service/api/invoice",
+      "DownstreamPathTemplate": "/app-invoice/api/invoice",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -41,7 +41,7 @@
     /////////////////////////INICIO - API Notification/Mails////////////////////////////////////////////
     {
       //"applicationUrl": "http://localhost:5003/api/Notification"
-      "DownstreamPathTemplate": "/notification-service/api/Notification",
+      "DownstreamPathTemplate": "/app-notification/api/Notification",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -63,7 +63,7 @@
     /////////////////////////INICIO - API PAY/Pagos////////////////////////////////////////////
     {
       //"applicationUrl": "http://localhost:5004/api/transaction/Pay"
-      "DownstreamPathTemplate": "/pay-service/api/Transaction/Pay",
+      "DownstreamPathTemplate": "/app-pay/api/Transaction/Pay",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -83,7 +83,7 @@
     /////////////////////////INICIO - API TRANSACTION/History//////////////////////////////////
     {
       //"applicationUrl": "http://localhost:5005/api/History/1"
-      "DownstreamPathTemplate": "/history-service/api/History/{Idinvoice}",
+      "DownstreamPathTemplate": "/app-transaction/api/History/{idinvoice}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -91,7 +91,7 @@
           "Port": 9999
         }
       ],
-      "UpstreamPathTemplate": "/api/movimiento/{Idinvoice}",
+      "UpstreamPathTemplate": "/api/movimiento/{idinvoice}",
       "UpstreamHttpMethod": [ "Get" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "SECURITY-TOKEN",

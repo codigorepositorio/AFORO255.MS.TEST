@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AFORO255.MS.TEST.Transaction.DTO;
 using AFORO255.MS.TEST.Transaction.Model;
 using AFORO255.MS.TEST.Transaction.Service;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
+using MS.AFORO255.Cross.Metrics.Registry;
 
 namespace AFORO255.MS.TEST.Transaction.Controllers
 {
@@ -13,22 +16,44 @@ namespace AFORO255.MS.TEST.Transaction.Controllers
     [ApiController]
     public class HistoryController : ControllerBase
     {
+        private readonly IDistributedCache _distributedCache;
+        private readonly IMetricsRegistry _metricsRegistry;
         private readonly IHistoryService _historyService;
+        private readonly ILogger<HistoryController> _logger;
 
-        public HistoryController(IHistoryService historyService)
+        public HistoryController(IDistributedCache distributedCache, IMetricsRegistry metricsRegistry, IHistoryService historyService, ILogger<HistoryController> logger)
         {
+            _distributedCache = distributedCache;
+            _metricsRegistry = metricsRegistry;
             _historyService = historyService;
+            _logger = logger;
         }
 
-        [HttpGet("{Idinvoice}")]
-        public async Task<IActionResult> GetHistory(int Idinvoice)
+        [HttpGet("{idinvoice}")]
+        public async Task<IActionResult> GetHistory(int idinvoice)
         {
-            var result = await _historyService.GetAll();
+            _metricsRegistry.IncrementFindQuery();
+            _logger.LogInformation("Get History {idinvoice} ");
+            string _key = $"key-invoice-{idinvoice}";
 
-            //var data = result.Where(x => x.Idinvoice.Equals(Idinvoice)).ToList();
+            var _cache = _distributedCache.GetString(_key);
+            List<HistoryResponse> model = null;
+            if (_cache == null)
+            {
+                var result = await _historyService.GetAll();
+                model = result.Where(x => x.Idinvoice.Equals(idinvoice)).ToList();
 
-            return Ok(result);
-        }
+                var options = new DistributedCacheEntryOptions()
+                                    .SetSlidingExpiration(TimeSpan.FromSeconds(30));
+                _distributedCache.SetString(_key, Newtonsoft.Json.JsonConvert.SerializeObject(model), options);
+            }
+            else
+            {
+                model = Newtonsoft.Json.JsonConvert.DeserializeObject<List<HistoryResponse>>(_cache);
+            }
+            return Ok(model);
+
+       }
 
         [HttpPost]
         public async Task<IActionResult> CreateHistory(HistoryTransaction request)

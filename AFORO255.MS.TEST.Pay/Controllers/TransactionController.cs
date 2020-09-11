@@ -2,6 +2,8 @@
 using AFORO255.MS.TEST.Pay.RabbitMQ.Commands;
 using AFORO255.MS.TEST.Pay.Service;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using MS.AFORO255.Cross.Metrics.Registry;
 using MS.AFORO255.Cross.RabbitMQ.Src.Bus;
 using System;
 using System.Linq;
@@ -15,12 +17,16 @@ namespace AFORO255.MS.TEST.Pay.Controllers
         private readonly IInvoiceService _invoiceService;
         private readonly IEventBus _bus;
         private readonly ITransactionService _transactionService;
+        private readonly IMetricsRegistry _metricsRegistry;
+        private readonly ILogger<TransactionController> _logger;
 
-        public TransactionController(IInvoiceService invoiceService, IEventBus bus, ITransactionService transactionService)
+        public TransactionController(IInvoiceService invoiceService, IEventBus bus, ITransactionService transactionService, IMetricsRegistry metricsRegistry, ILogger<TransactionController> logger)
         {
             _invoiceService = invoiceService;
             _bus = bus;
             _transactionService = transactionService;
+            _metricsRegistry = metricsRegistry;
+            _logger = logger;
         }
         [HttpGet]
         public IActionResult GetTransaction()
@@ -32,6 +38,8 @@ namespace AFORO255.MS.TEST.Pay.Controllers
         [HttpPost("Pay")]
         public IActionResult Pagos([FromBody] InvoiceRequest request)
         {
+            _metricsRegistry.IncrementFindQuery();
+            _logger.LogInformation("Post Pay(Pagos)");
 
             Model.Transaction transaction = new Model.Transaction()
             {

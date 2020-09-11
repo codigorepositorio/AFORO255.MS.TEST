@@ -1,13 +1,19 @@
 ﻿
 dotnet publish -c Release --output ./publish
-
-docker build -t contenedor02  . --network micro
-
-
-docker run -d -p 5020:5002 --name=app-invoices contenedor02 --network aforo255-test
+docker build -t contenedor01  .  --network aforo255-test
+docker run -d -p 8001:8080 --name=app-security contenedor01 --network aforo255-test
 
 http://localhost:8012/api/courses
 
+docker exec -i -t app-docker /bin/bash
+
+dotnet publish -c Release --output ./publish
+
+docker build -t ivancuadros1988/docker  .
 
 
-docker exec -i -t app-app1 /bin/bash
+docker run -d -p 8012:8080 --name=app-docker ivancuadros1988/docker
+
+http://localhost:8012/api/courses
+
+docker exec -i -t app-docker /bin/bash

@@ -3,6 +3,6 @@
     public class SendMailDto
     {        
         public string SendDate { get; set; }
-        public int AccountId { get; set; }
+        public int InvoiceId { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace AFORO255.MS.TEST.Notification.RabbitMQ.EventHandler
             _iMailRepository.Add(new SendMail()
             {
                 SendMailId = @event.IdOperation,
-                AccountId = @event.IdInvoice,                
+                InvoiceId = @event.IdInvoice,                
                 SendDate = DateTime.Now.ToShortDateString()
             });
             return Task.CompletedTask;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MS.AFORO255.Cross.Metrics.Metrics;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace AFORO255.MS.TEST.Pay
@@ -25,6 +26,9 @@ namespace AFORO255.MS.TEST.Pay
                     {
                         var env = host.HostingEnvironment;
                         builder.AddConfigServer(env.EnvironmentName);
+
+                        ///////Metricas-Prometheus
+                        webBuilder.UseAppMetrics();
                     });
                     webBuilder.UseStartup<Startup>();
                 });

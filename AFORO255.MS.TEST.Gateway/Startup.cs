@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MS.AFORO255.Cross.Jaeger.Jaeger;
 using MS.AFORO255.Cross.Jwt.Src;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -30,6 +31,11 @@ namespace AFORO255.MS.TEST.Gateway
             
             services.AddOcelot();
             services.AddJwtCustomized();
+
+            /*Start Jaeger*/
+            services.AddJaeger();
+            services.AddOpenTracing();
+            /*End Jaeger*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@ namespace AFORO255.MS.TEST.Security.Controllers
         [HttpGet("ping")]
         public IActionResult Ping()
         {
-            return Ok();
+            return Ok("Hola");
         }
     }
 }

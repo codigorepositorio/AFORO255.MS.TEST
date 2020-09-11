@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AFORO255.MS.TEST.Pay.Model
 {
-    [Table("transaction")]
+    [Table("Pay")]
     public class Transaction
     {
         [Key]
