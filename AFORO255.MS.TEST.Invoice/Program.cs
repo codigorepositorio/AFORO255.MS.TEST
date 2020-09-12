@@ -11,20 +11,18 @@ namespace AFORO255.MS.TEST.Invoice
         {
             CreateHostBuilder(args).Build().Run();
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.ConfigureAppConfiguration((host, builder) =>
                 {
-                    webBuilder.ConfigureAppConfiguration((host, builder) =>
-                    {
-                        var env = host.HostingEnvironment;
-                        builder.AddConfigServer(env.EnvironmentName);
-
+                    var env = host.HostingEnvironment;
+                    builder.AddConfigServer(env.EnvironmentName);
                         ///////Metricas-Prometheus
                         webBuilder.UseAppMetrics();
-                    });
-                    webBuilder.UseStartup<Startup>();
                 });
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

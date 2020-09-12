@@ -37,7 +37,6 @@ namespace AFORO255.MS.TEST.Security
             services.AddDbContext<ContextDatabase>(
            opt =>
            {
-               //opt.UseSqlServer(Configuration["sqlserver:cn"]);
                opt.UseSqlServer(Configuration["cnsql"]);
 
            });
@@ -59,22 +58,22 @@ namespace AFORO255.MS.TEST.Security
             /*End Jaeger*/
 
 
-            ///*Metricas - Prometheus*/
-            ///*Start - Metrics*/
-            //// If using Kestrel:
-            //services.Configure<KestrelServerOptions>(options =>
-            //{
-            //    options.AllowSynchronousIO = true;
-            //});
+            /*Metricas - Prometheus*/
+            /*Start - Metrics*/
+            // If using Kestrel:
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
 
-            //// If using IIS:
-            //services.Configure<IISServerOptions>(options =>
-            //{
-            //    options.AllowSynchronousIO = true;
-            //});
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
 
-            //services.AddTransient<IMetricsRegistry, MetricsRegistry>();
-            ///*End - Metrics*/
+            services.AddTransient<IMetricsRegistry, MetricsRegistry>();
+            /*End - Metrics*/
 
         }
 

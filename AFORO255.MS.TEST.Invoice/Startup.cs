@@ -46,8 +46,6 @@ namespace AFORO255.MS.TEST.Invoice
             services.AddTransient<IInvoiceRepository, InvoiceRepository>();
             services.AddTransient<IInvoiceService, InvoiceService>();
 
-
-
             ///*Start - RabbitMQ */
             services.AddMediatR(typeof(Startup));
             services.AddRabbitMQ();

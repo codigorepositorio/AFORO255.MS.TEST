@@ -19,8 +19,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "balancer-service-test",
-          "Port": 9999
+          "Host":"balancer-service-test",
+          "Port":9999
         }
       ],
       "UpstreamPathTemplate": "/api/factura",
@@ -36,8 +36,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "balancer-service-test",
-          "Port": 9999
+          "Host":"balancer-service-test",
+          "Port":9999
         }
       ],
       "UpstreamPathTemplate": "/api/mail",
@@ -52,8 +52,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "balancer-service-test",
-          "Port": 9999
+          "Host":"balancer-service-test",
+          "Port":9999
         }
       ],
       "UpstreamPathTemplate": "/api/pago",
@@ -69,14 +69,14 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "balancer-service-test",
-          "Port": 9999
+          "Host":"balancer-service-test",
+          "Port":9999
         }
       ],
-      "UpstreamPathTemplate": "/api/movimiento/{idinvoice}",
+      "UpstreamPathTemplate":"/api/movimiento/{idinvoice}",
       "UpstreamHttpMethod": [ "Get" ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "SECURITY-TOKEN",
+        "AuthenticationProviderKey":"SECURITY-TOKEN",
         "AllowedScopes": []
       }
     }    
