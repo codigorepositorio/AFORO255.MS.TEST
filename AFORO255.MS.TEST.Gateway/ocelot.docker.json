@@ -2,29 +2,24 @@
   "Routes": [
     {
 
-      /////////////////////////INICIO - API SECURITY/Seguridad////////////////////////////////////////
-      //"applicationUrl": "http://localhost:5001/api/auht"
-      "DownstreamPathTemplate": "api/auth",
+      "DownstreamPathTemplate": "/api/auth",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "app-security",
-          "Port": 8080
+          "Host":"app-security",
+          "Port":8080
         }
       ],
       "UpstreamPathTemplate": "/api/token",
       "UpstreamHttpMethod": [ "Post" ]
     },
 
-    /////////////////////////INICIO - API INVOICE/FACTURAS ////////////////////////////////////////////
-    {
-      //"applicationUrl": "http://localhost:5002/api/invoice"
-      //"http": null, //localhost:9999/invoice-service/api/invoice
+    {    
       "DownstreamPathTemplate": "/app-invoice/api/invoice",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "fabio-service-test",
+          "Host": "balancer-service-test",
           "Port": 9999
         }
       ],
@@ -35,17 +30,13 @@
         "AllowedScopes": []
       }
     },
-    /////////////////////////FIN////////////////////////////////////////////
 
-
-    /////////////////////////INICIO - API Notification/Mails////////////////////////////////////////////
-    {
-      //"applicationUrl": "http://localhost:5003/api/Notification"
+    {      
       "DownstreamPathTemplate": "/app-notification/api/Notification",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "fabio-service-test",
+          "Host": "balancer-service-test",
           "Port": 9999
         }
       ],
@@ -56,18 +47,12 @@
         "AllowedScopes": []
       }
     },
-
-    /////////////////////////FIN////////////////////////////////////////////
-
-
-    /////////////////////////INICIO - API PAY/Pagos////////////////////////////////////////////
-    {
-      //"applicationUrl": "http://localhost:5004/api/transaction/Pay"
+    {      
       "DownstreamPathTemplate": "/app-pay/api/Transaction/Pay",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "fabio-service-test",
+          "Host": "balancer-service-test",
           "Port": 9999
         }
       ],
@@ -78,16 +63,13 @@
         "AllowedScopes": []
       }
     },
-    /////////////////////////FIN////////////////////////////////////////////
-
-    /////////////////////////INICIO - API TRANSACTION/History//////////////////////////////////
     {
       //"applicationUrl": "http://localhost:5005/api/History/1"
       "DownstreamPathTemplate": "/app-transaction/api/History/{idinvoice}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "fabio-service-test",
+          "Host": "balancer-service-test",
           "Port": 9999
         }
       ],
@@ -97,21 +79,17 @@
         "AuthenticationProviderKey": "SECURITY-TOKEN",
         "AllowedScopes": []
       }
-    }
-    /////////////////////////FIN////////////////////////////////////////////
+    }    
   ],
-
-  //"GlobalConfiguration": {
-  //  "BaseUrl": "http://localhost:5000"
-  //}
 
   "GlobalConfiguration": {
     "BaseUrl": "http://app-gateway:8080",
-    "ServiceDiscoveryProvider": {
-      "Scheme": "http",
-      "Host": "consul-service-test",
-      "Port": 8500,
-      "Type": "Consul"
+    "RateLimitOptions": {
+      "ClientWhitelist": [],
+      "EnableRateLimiting": true,
+      "Period": "30s",
+      "PeriodTimespan": 1,
+      "Limit": 100
     }
   }
 }

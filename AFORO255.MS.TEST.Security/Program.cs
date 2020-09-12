@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using MS.AFORO255.Cross.Metrics.Metrics;
 using Steeltoe.Extensions.Configuration.ConfigServer;
 
 namespace AFORO255.MS.TEST.Security
@@ -25,10 +18,7 @@ namespace AFORO255.MS.TEST.Security
                     webBuilder.ConfigureAppConfiguration((host, builder) =>
                     {
                         var env = host.HostingEnvironment;
-                        builder.AddConfigServer(env.EnvironmentName);
-
-                        ///////Metricas-Prometheus
-                        webBuilder.UseAppMetrics();
+                        builder.AddConfigServer(env.EnvironmentName);        
                     });
                     webBuilder.UseStartup<Startup>();
                 });

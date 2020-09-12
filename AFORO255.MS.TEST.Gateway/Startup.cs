@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MS.AFORO255.Cross.Jaeger.Jaeger;
 using MS.AFORO255.Cross.Jwt.Src;
 using Ocelot.DependencyInjection;
@@ -25,10 +18,22 @@ namespace AFORO255.MS.TEST.Gateway
 
         public IConfiguration Configuration { get; }
 
+        readonly string MyPolicy = "_myPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            /*Start - Cors*/
+            services.AddCors(o => o.AddPolicy(MyPolicy, builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+
+            }));
+            services.AddRouting(r => r.SuppressCheckForUnhandledSecurityMetadata = true);
+            /*End - Cors*/
+
             services.AddOcelot();
             services.AddJwtCustomized();
 
@@ -41,6 +46,16 @@ namespace AFORO255.MS.TEST.Gateway
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*Start - Cors*/
+            app.UseCors(MyPolicy);
+            app.Use((context, next) =>
+            {
+                context.Items["__CorsMiddlewareInvoked"] = true;
+                return next();
+            });
+            /*End - Cors*/
+
+
             app.UseOcelot().Wait();
         }
     }

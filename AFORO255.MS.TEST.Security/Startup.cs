@@ -32,8 +32,7 @@ namespace AFORO255.MS.TEST.Security
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.Configure<JwtOptions>(Configuration.GetSection("jwt"));
-         
+            services.Configure<JwtOptions>(Configuration.GetSection("jwt"));         
 
             services.AddDbContext<ContextDatabase>(
            opt =>
@@ -60,22 +59,22 @@ namespace AFORO255.MS.TEST.Security
             /*End Jaeger*/
 
 
-            /*Metricas - Prometheus*/
-            /*Start - Metrics*/
-            // If using Kestrel:
-            services.Configure<KestrelServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
-            });
+            ///*Metricas - Prometheus*/
+            ///*Start - Metrics*/
+            //// If using Kestrel:
+            //services.Configure<KestrelServerOptions>(options =>
+            //{
+            //    options.AllowSynchronousIO = true;
+            //});
 
-            // If using IIS:
-            services.Configure<IISServerOptions>(options =>
-            {
-                options.AllowSynchronousIO = true;
-            });
+            //// If using IIS:
+            //services.Configure<IISServerOptions>(options =>
+            //{
+            //    options.AllowSynchronousIO = true;
+            //});
 
-            services.AddTransient<IMetricsRegistry, MetricsRegistry>();
-            /*End - Metrics*/
+            //services.AddTransient<IMetricsRegistry, MetricsRegistry>();
+            ///*End - Metrics*/
 
         }
 
@@ -98,20 +97,18 @@ namespace AFORO255.MS.TEST.Security
                 endpoints.MapControllers();
             });
 
-
-            /*Log Centralizado - Seq*/
-            if (bool.Parse(Configuration["seq:enabled"]) == true)
-            {
-                loggerFactory.AddSeq(Configuration["seq:url"], apiKey: Configuration["seq:token"]);
-            }
-
-
             //Genera el ID  de consult
             var serviceId = app.UseConsul();
             hostApplicationLifetime.ApplicationStopped.Register(() =>
             {
                 consulClient.Agent.ServiceDeregister(serviceId);
             });
+
+            /*Log Centralizado - Seq*/
+            if (bool.Parse(Configuration["seq:enabled"]) == true)
+            {
+                loggerFactory.AddSeq(Configuration["seq:url"], apiKey: Configuration["seq:token"]);
+            }
         }
     }
 }
